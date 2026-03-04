@@ -1,0 +1,656 @@
+<!DOCTYPE html>
+
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>FocusBoost — Peripheral Route v2</title>
+<link href="https://fonts.googleapis.com/css2?family=Righteous&family=Titan+One&family=Nunito:wght@400;700;900&display=swap" rel="stylesheet">
+<style>
+*, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+
+:root {
+–hot-pink: #FF2D78;
+–electric-yellow: #FFE600;
+–sky-blue: #00C8FF;
+–deep-navy: #0A0A2E;
+–lime: #AAFF00;
+–orange: #FF6B00;
+–white: #FFFFFF;
+}
+
+body {
+width: 794px;
+height: 1123px;
+overflow: hidden;
+background: var(–deep-navy);
+}
+
+.poster {
+width: 794px;
+height: 1123px;
+position: relative;
+background: var(–electric-yellow);
+overflow: hidden;
+font-family: ‘Nunito’, sans-serif;
+}
+
+/* Halftone background texture */
+.halftone {
+position: absolute;
+inset: 0;
+background-image: radial-gradient(circle, rgba(0,0,0,0.06) 1px, transparent 1px);
+background-size: 12px 12px;
+z-index: 0;
+}
+
+/* Big diagonal stripe */
+.stripe-bg {
+position: absolute;
+top: -100px;
+right: -80px;
+width: 520px;
+height: 900px;
+background: var(–hot-pink);
+transform: rotate(-12deg);
+z-index: 1;
+}
+
+.stripe-bg2 {
+position: absolute;
+top: -60px;
+right: -120px;
+width: 200px;
+height: 900px;
+background: var(–sky-blue);
+transform: rotate(-12deg);
+z-index: 2;
+}
+
+/* Bottom section */
+.bottom-wave {
+position: absolute;
+bottom: 0; left: 0; right: 0;
+height: 340px;
+background: var(–deep-navy);
+clip-path: ellipse(110% 100% at 50% 100%);
+z-index: 1;
+}
+
+/* Route label */
+.route-pill {
+position: absolute;
+top: 28px;
+left: 32px;
+z-index: 20;
+background: var(–deep-navy);
+color: var(–electric-yellow);
+font-family: ‘Righteous’, cursive;
+font-size: 10px;
+letter-spacing: 3px;
+text-transform: uppercase;
+padding: 6px 14px;
+border-radius: 20px;
+}
+
+/* SALE starburst */
+.starburst {
+position: absolute;
+top: 22px;
+right: 30px;
+z-index: 20;
+width: 110px;
+height: 110px;
+background: var(–electric-yellow);
+border-radius: 50%;
+display: flex;
+flex-direction: column;
+align-items: center;
+justify-content: center;
+box-shadow: 0 0 0 8px var(–deep-navy), 0 0 0 14px var(–electric-yellow), 0 0 0 18px var(–hot-pink);
+animation: pulse-star 2s ease-in-out infinite;
+}
+
+@keyframes pulse-star {
+0%, 100% { transform: scale(1) rotate(0deg); }
+50% { transform: scale(1.06) rotate(3deg); }
+}
+
+.starburst-week {
+font-family: ‘Righteous’, cursive;
+font-size: 9px;
+letter-spacing: 1px;
+color: var(–deep-navy);
+text-transform: uppercase;
+}
+
+.starburst-price {
+font-family: ‘Titan One’, cursive;
+font-size: 30px;
+color: var(–hot-pink);
+line-height: 1;
+}
+
+.starburst-only {
+font-family: ‘Nunito’, sans-serif;
+font-size: 9px;
+font-weight: 900;
+color: var(–deep-navy);
+text-transform: uppercase;
+letter-spacing: 1px;
+margin-top: -3px;
+}
+
+/* Hero student illustration */
+.hero-area {
+position: absolute;
+top: 50px;
+left: 20px;
+z-index: 10;
+width: 360px;
+text-align: center;
+}
+
+.student-frame {
+width: 240px;
+height: 240px;
+margin: 0 auto;
+border-radius: 50%;
+background: var(–electric-yellow);
+border: 6px solid var(–deep-navy);
+box-shadow: 8px 8px 0 var(–deep-navy);
+display: flex;
+align-items: center;
+justify-content: center;
+font-size: 120px;
+position: relative;
+overflow: hidden;
+}
+
+.student-frame::after {
+content: ‘✨’;
+position: absolute;
+top: 10px; right: 10px;
+font-size: 28px;
+animation: sparkle-anim 1.5s ease-in-out infinite;
+}
+
+@keyframes sparkle-anim {
+0%, 100% { opacity: 1; transform: scale(1); }
+50% { opacity: 0.5; transform: scale(0.7); }
+}
+
+/* Can graphic */
+.can-hero {
+position: absolute;
+top: 100px;
+right: 10px;
+z-index: 15;
+animation: can-float 2.8s ease-in-out infinite;
+}
+
+@keyframes can-float {
+0%, 100% { transform: translateY(0) rotate(8deg); }
+50% { transform: translateY(-16px) rotate(5deg); }
+}
+
+.can-shape {
+width: 100px;
+height: 200px;
+background: linear-gradient(160deg, var(–sky-blue) 0%, var(–deep-navy) 40%, var(–hot-pink) 80%, var(–orange) 100%);
+border-radius: 14px 14px 18px 18px;
+display: flex;
+flex-direction: column;
+align-items: center;
+justify-content: center;
+gap: 2px;
+box-shadow: -6px 6px 0 var(–deep-navy);
+position: relative;
+}
+
+.can-shape::before {
+content: ‘’;
+position: absolute;
+top: -16px; left: 8px; right: 8px;
+height: 20px;
+background: linear-gradient(#aaa, #ddd);
+border-radius: 8px 8px 0 0;
+}
+
+.can-text-top {
+font-family: ‘Titan One’, cursive;
+font-size: 11px;
+color: var(–electric-yellow);
+letter-spacing: 2px;
+text-align: center;
+}
+
+.can-text-main {
+font-family: ‘Titan One’, cursive;
+font-size: 20px;
+color: #fff;
+text-align: center;
+line-height: 1;
+text-shadow: 2px 2px 0 rgba(0,0,0,0.3);
+}
+
+.can-text-sub {
+font-size: 9px;
+color: rgba(255,255,255,0.7);
+letter-spacing: 1px;
+font-family: ‘Righteous’, cursive;
+}
+
+/* Speech bubble */
+.speech-bubble {
+position: absolute;
+top: 295px;
+left: 50px;
+z-index: 20;
+background: #fff;
+border: 4px solid var(–deep-navy);
+border-radius: 20px;
+padding: 10px 18px;
+box-shadow: 4px 4px 0 var(–deep-navy);
+max-width: 200px;
+}
+
+.speech-bubble::after {
+content: ‘’;
+position: absolute;
+bottom: -18px; left: 30px;
+border: 9px solid transparent;
+border-top-color: var(–deep-navy);
+}
+
+.speech-bubble::before {
+content: ‘’;
+position: absolute;
+bottom: -11px; left: 33px;
+border: 7px solid transparent;
+border-top-color: #fff;
+z-index: 1;
+}
+
+.bubble-text {
+font-size: 12px;
+font-weight: 900;
+color: var(–deep-navy);
+line-height: 1.3;
+}
+
+.bubble-text em {
+color: var(–hot-pink);
+font-style: normal;
+}
+
+/* Main headline area */
+.headline-block {
+position: absolute;
+top: 340px;
+left: 32px;
+z-index: 15;
+width: 440px;
+}
+
+.headline-eyebrow {
+font-family: ‘Righteous’, cursive;
+font-size: 11px;
+letter-spacing: 4px;
+text-transform: uppercase;
+color: var(–hot-pink);
+margin-bottom: 6px;
+}
+
+.headline-main {
+font-family: ‘Titan One’, cursive;
+font-size: 84px;
+color: var(–deep-navy);
+line-height: 0.88;
+letter-spacing: -2px;
+}
+
+.headline-main .outline {
+-webkit-text-stroke: 3px var(–deep-navy);
+color: transparent;
+}
+
+.headline-sub {
+font-family: ‘Righteous’, cursive;
+font-size: 16px;
+color: var(–deep-navy);
+margin-top: 10px;
+letter-spacing: 1px;
+}
+
+/* Social proof strip */
+.social-strip {
+position: absolute;
+top: 590px;
+left: 0; right: 0;
+z-index: 15;
+background: var(–deep-navy);
+padding: 14px 32px;
+display: flex;
+align-items: center;
+justify-content: space-between;
+border-top: 4px solid var(–electric-yellow);
+border-bottom: 4px solid var(–electric-yellow);
+}
+
+.social-stat {
+text-align: center;
+}
+
+.stat-num {
+font-family: ‘Titan One’, cursive;
+font-size: 28px;
+color: var(–electric-yellow);
+line-height: 1;
+}
+
+.stat-label {
+font-size: 10px;
+color: rgba(255,255,255,0.6);
+letter-spacing: 1px;
+text-transform: uppercase;
+font-weight: 700;
+}
+
+.social-divider {
+width: 1px;
+height: 40px;
+background: rgba(255,255,255,0.2);
+}
+
+/* Packaging section */
+.packaging-section {
+position: absolute;
+top: 680px;
+left: 32px; right: 32px;
+z-index: 15;
+display: flex;
+align-items: center;
+gap: 20px;
+}
+
+.pack-label-block {
+flex: 1;
+}
+
+.pack-eyebrow {
+font-family: ‘Righteous’, cursive;
+font-size: 10px;
+letter-spacing: 3px;
+text-transform: uppercase;
+color: var(–electric-yellow);
+margin-bottom: 6px;
+}
+
+.pack-title {
+font-family: ‘Titan One’, cursive;
+font-size: 26px;
+color: #fff;
+line-height: 1.1;
+}
+
+.pack-desc {
+font-size: 12px;
+color: rgba(255,255,255,0.65);
+margin-top: 6px;
+line-height: 1.5;
+max-width: 280px;
+}
+
+.mini-cans {
+display: flex;
+gap: 8px;
+align-items: flex-end;
+}
+
+.mini-can {
+border-radius: 6px 6px 8px 8px;
+display: flex;
+align-items: center;
+justify-content: center;
+font-family: ‘Titan One’, cursive;
+color: #fff;
+font-size: 7px;
+letter-spacing: 0.5px;
+box-shadow: 2px 3px 0 rgba(0,0,0,0.3);
+}
+
+/* Stars row */
+.stars-row {
+position: absolute;
+top: 840px;
+left: 32px; right: 32px;
+z-index: 15;
+display: flex;
+align-items: center;
+justify-content: space-between;
+}
+
+.stars-block {
+display: flex;
+align-items: center;
+gap: 10px;
+}
+
+.stars-visual {
+font-size: 24px;
+letter-spacing: 3px;
+filter: drop-shadow(0 0 8px rgba(255,230,0,0.8));
+}
+
+.stars-text {
+font-family: ‘Nunito’, sans-serif;
+font-size: 13px;
+font-weight: 900;
+color: var(–white);
+}
+
+.stars-sub {
+font-size: 11px;
+color: rgba(255,255,255,0.55);
+font-weight: 400;
+}
+
+/* CTA button */
+.cta-wrap {
+position: absolute;
+bottom: 50px;
+left: 32px; right: 32px;
+z-index: 20;
+text-align: center;
+}
+
+.cta-btn {
+display: inline-block;
+background: var(–electric-yellow);
+color: var(–deep-navy);
+font-family: ‘Titan One’, cursive;
+font-size: 26px;
+letter-spacing: 1px;
+padding: 20px 60px;
+border-radius: 60px;
+border: 4px solid var(–deep-navy);
+box-shadow: 6px 6px 0 var(–deep-navy);
+text-decoration: none;
+position: relative;
+overflow: hidden;
+cursor: pointer;
+animation: btn-bounce 3s ease-in-out infinite;
+}
+
+@keyframes btn-bounce {
+0%, 100% { transform: translateY(0); }
+50% { transform: translateY(-4px); }
+}
+
+.cta-btn::after {
+content: ‘’;
+position: absolute;
+top: 0; left: -80%;
+width: 60%;
+height: 100%;
+background: linear-gradient(90deg, transparent, rgba(255,255,255,0.4), transparent);
+animation: shimmer 2.5s infinite;
+}
+
+@keyframes shimmer {
+to { left: 150%; }
+}
+
+/* Floating decorative elements */
+.deco {
+position: absolute;
+z-index: 8;
+font-size: 32px;
+animation: deco-float 4s ease-in-out infinite;
+}
+
+@keyframes deco-float {
+0%, 100% { transform: translateY(0) rotate(0deg); }
+50% { transform: translateY(-10px) rotate(10deg); }
+}
+
+.tag-badge {
+position: absolute;
+z-index: 20;
+background: var(–lime);
+color: var(–deep-navy);
+font-family: ‘Righteous’, cursive;
+font-size: 10px;
+letter-spacing: 1px;
+text-transform: uppercase;
+padding: 5px 12px;
+border-radius: 4px;
+border: 2px solid var(–deep-navy);
+box-shadow: 2px 2px 0 var(–deep-navy);
+}
+</style>
+
+</head>
+<body>
+<div class="poster">
+  <div class="halftone"></div>
+  <div class="stripe-bg"></div>
+  <div class="stripe-bg2"></div>
+  <div class="bottom-wave"></div>
+
+  <!-- Decorative elements -->
+
+  <div class="deco" style="top:410px;right:30px;animation-delay:0.5s">⚡</div>
+  <div class="deco" style="top:480px;left:420px;animation-delay:1s;font-size:22px">★</div>
+  <div class="deco" style="top:460px;right:70px;animation-delay:1.8s;font-size:20px">💥</div>
+
+  <!-- Route label -->
+
+  <div class="route-pill">ELM · Peripheral Route</div>
+
+  <!-- Sale starburst -->
+
+  <div class="starburst">
+    <div class="starburst-week">This Week</div>
+    <div class="starburst-price">$1.99</div>
+    <div class="starburst-only">only!</div>
+  </div>
+
+  <!-- Hero student -->
+
+  <div class="hero-area">
+    <div class="student-frame">🧑‍💻</div>
+  </div>
+
+  <!-- Floating can -->
+
+  <div class="can-hero">
+    <div class="can-shape">
+      <div class="can-text-top">NEW</div>
+      <div class="can-text-main">FOCUS<br>BOOST</div>
+      <div class="can-text-sub">250ML</div>
+    </div>
+  </div>
+
+  <!-- Speech bubble -->
+
+  <div class="speech-bubble">
+    <div class="bubble-text">"This is my <em>secret weapon</em> for finals week!"</div>
+  </div>
+
+  <!-- Tags -->
+
+  <div class="tag-badge" style="top:530px;left:32px;">✦ New Look</div>
+  <div class="tag-badge" style="top:530px;left:150px;background:var(--hot-pink);color:#fff;">✦ Vibrant Pack</div>
+
+  <!-- Main headline -->
+
+  <div class="headline-block">
+    <div class="headline-eyebrow">✦ Power Up Your Study Session ✦</div>
+    <div class="headline-main">
+      FOCUS<br><span class="outline">BOOST</span>
+    </div>
+    <div class="headline-sub">Energy Drink · Made for Students</div>
+  </div>
+
+  <!-- Social proof strip -->
+
+  <div class="social-strip">
+    <div class="social-stat">
+      <div class="stat-num">50K+</div>
+      <div class="stat-label">Students Love It</div>
+    </div>
+    <div class="social-divider"></div>
+    <div class="social-stat">
+      <div class="stat-num">★ 4.9</div>
+      <div class="stat-label">Campus Rating</div>
+    </div>
+    <div class="social-divider"></div>
+    <div class="social-stat">
+      <div class="stat-num">#1</div>
+      <div class="stat-label">Study Drink</div>
+    </div>
+    <div class="social-divider"></div>
+    <div class="social-stat">
+      <div class="stat-num">48h</div>
+      <div class="stat-label">Flash Sale Left</div>
+    </div>
+  </div>
+
+  <!-- Packaging section -->
+
+  <div class="packaging-section">
+    <div class="pack-label-block">
+      <div class="pack-eyebrow">✦ Redesigned Packaging</div>
+      <div class="pack-title">Bold. Bright.<br>Built for You.</div>
+      <div class="pack-desc">Available in 4 new colorways designed to stand out in your bag, on your desk, and on your feed.</div>
+    </div>
+    <div class="mini-cans">
+      <div class="mini-can" style="width:34px;height:70px;background:linear-gradient(#FF2D78,#FF6B00);"></div>
+      <div class="mini-can" style="width:34px;height:82px;background:linear-gradient(#00C8FF,#0A0A2E);"></div>
+      <div class="mini-can" style="width:34px;height:70px;background:linear-gradient(#AAFF00,#00C8FF);"></div>
+      <div class="mini-can" style="width:34px;height:76px;background:linear-gradient(#FFE600,#FF2D78);"></div>
+    </div>
+  </div>
+
+  <!-- Stars -->
+
+  <div class="stars-row">
+    <div class="stars-block">
+      <div class="stars-visual">★★★★★</div>
+      <div>
+        <div class="stars-text">Campus Approved</div>
+        <div class="stars-sub">Loved by 50,000+ students nationwide</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- CTA -->
+
+  <div class="cta-wrap">
+    <div class="cta-btn">GRAB YOURS NOW →</div>
+  </div>
+</div>
+</body>
+</html>
